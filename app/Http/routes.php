@@ -15,9 +15,18 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('profile', 'UserController@profile');
-Route::post('profile', 'UserController@update_avatar');
-
-Route::auth();
+Route::get('/about', function () {
+    return view('about');
+});
 
 Route::get('/home', 'HomeController@index');
+
+Route::post('/language', array (
+   'Middleware'=>'LanguageSwitcher',
+   'uses'=>'LanguageController@index'
+));
+
+Route::get('profile', 'UserController@profile');
+Route::post('profile', 'UserController@update_avatar');
+Route::auth();
+
