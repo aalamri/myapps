@@ -16,6 +16,8 @@ Route::get('/', function () {
 });
 
 Route::resource('courses', 'CourseController');
+Route::post('save','CourseController@save');
+
 
 Route::get('/home', 'HomeController@index');
 

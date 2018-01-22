@@ -28,6 +28,7 @@
     <body id="app-layout">
         <nav class="navbar navbar-default navbar-static-top" style="background-color: #60ba46; border-color: #60ba46;">
             <div class="container">
+                @include('inc.messages')
                 <div class="navbar-header">
 
                     <!-- Collapsed Hamburger -->
@@ -42,22 +43,25 @@
                     <a class="navbar-brand" href="{{ url('/') }}"  style="color: white;">
                         Store
                     </a>
+                    <a class="navbar-brand" href="{{ url('/courses') }}" style="color: white;">
+                    Courses
+                    </a>
+
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                       
+
                     </ul>
 
                     <!-- Right Side Of Navbar -->
                     <ul class="nav navbar-nav navbar-right">
                         <!-- Authentication Links -->
                         @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}" style="color: white;" <i class="fa fa-btn fa-sign-in"></i> @lang('file.Login')</a></li>
+                        <li><a href="{{ url('/login') }}" style="color: white;"> <i class="fa fa-btn fa-sign-in"></i> @lang('file.Login')</a></li>
                         <li><a href="{{ url('/register') }}"  style="color: white;">@lang('file.Register')</a></li>
-                        <li><a href="{{ url('/home') }}" style="color: white;"<i class="fa fa-btn fa-language"> </i> @lang('file.Language')</a></li>
-
+                        <li><a href="{{ url('/home') }}" style="color: white;"><i class="fa fa-btn fa-language"> </i> @lang('file.Language')</a></li>
                         @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" style="position:relative; padding-left:50px; color: white;">
