@@ -147,6 +147,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        ConsoleTVs\Charts\ChartsServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
 
 
@@ -159,6 +160,9 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         Intervention\Image\ImageServiceProvider::class,
+
+        //file
+        Unisharp\Ckeditor\ServiceProvider::class,
 
     ],
 
@@ -207,6 +211,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Form' => Collective\Html\FormFacade::class,
+        'Charts' => ConsoleTVs\Charts\Facades\Charts::class,
         'Html' => Collective\Html\HtmlFacade::class,
 
     ],

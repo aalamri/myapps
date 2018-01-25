@@ -12,6 +12,8 @@
                             <div class="well">
                                 <h3><a href="/courses/{{$course->id}}">{{$course->name}}</a></h3>
                                 <small>Duration: {{$course->duration}}</small>
+                                <br>
+                                <small>By: {{$course->user->name}}</small>
                             </div>
                         @endforeach
                         {{$courses->links()}}

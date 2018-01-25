@@ -15,8 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('courses', 'CourseController');
+Route::resource("courses", "CourseController");
 Route::post('save','CourseController@save');
+Route::DELETE('delete/{id}','CourseController@delete');
+Route::put('update/{id}','CourseController@update');
 
 
 Route::get('/home', 'HomeController@index');
