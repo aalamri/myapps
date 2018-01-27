@@ -8,7 +8,7 @@
                     <div class="panel-heading">Create Course</div>
                     <div class="panel-body">
 
-                        {!! Form::open(['action' => 'CourseController@save', 'method' => 'POST']) !!}
+                        {!! Form::open(['action' => 'CourseController@save', 'method' => 'POST','enctype' =>'multipart/form-data']) !!}
                         {!! csrf_field() !!}
                         <div class="form-group">
                             {{Form::label('name', 'Name')}}
@@ -44,11 +44,14 @@
                             {{Form::label('end', 'End Date')}}
                             {{Form::date('end', '', ['class' => 'form-control', 'placeholder' => 'End Date'])}}
                         </div>
-                        {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
-                        {!! Form::close() !!}
+                        <div class="form-group">
+                             {{Form::file('avatar')}}
                     </div>
+                    {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
+    </div>
     </div>
 @endsection

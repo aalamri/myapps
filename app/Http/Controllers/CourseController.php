@@ -6,12 +6,14 @@ use Illuminate\Http\Request;
 use App\Course;
 use App\Http\Requests;
 use Illuminate\Support\Facades\DB;
+use Image;
+
 
 class CourseController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth', ['except' => array('courses','index','show')]);
+        $this->middleware('auth', ['except' => array('courses', 'index', 'show')]);
     }
 
     //Get all courses
@@ -40,11 +42,11 @@ class CourseController extends Controller
         $course = Course::find($id);
 
         //check for correct user
-        if(auth()->user()->id !==$course->user_id){
-            return redirect('/courses')->with('error','Unauthorized page');
+        if (auth()->user()->id !== $course->user_id) {
+            return redirect('/courses')->with('error', 'Unauthorized page');
 
         }
-        return view('courses.edit')->with('course',$course);
+        return view('courses.edit')->with('course', $course);
     }
 
     public function update($id, Request $request)
@@ -77,10 +79,31 @@ class CourseController extends Controller
             'price' => 'required',
             'trainerName' => 'required',
             'description' => 'required',
+            'avatar' => 'image|max:1999',
             'start' => 'required',
             'end' => 'required',
             'location' => 'required'
         ]);
+        //
+        $avatar = $request->file('avatar');
+        $filename = time() . '.' . $avatar->getClientOriginalExtension();
+        Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
+
+//        if ($request->hasFile('avatar')) {
+//            //Get file name with extension
+//            $fileNameWithExt = $request->file('avatar')->getClientOriginalName();
+//            //Get just file name
+//            $filename = pathinfo($fileNameWithExt, PATHINFO_FILENAME);
+//            //Get just extension
+//            $extension = $request->file('avatar')->getClientOriginalExtension();
+//            //fILE NAME TO STORE
+//            $fileNameToStore = $filename . '_' . time() . '.' . $extension;
+//
+//            //Upload image
+//            $path = $request->file('avatar')->storeAs('public/cover_images', $fileNameToStore);
+//        } else {
+//            $fileNameToStore = 'default.jpg';
+//        }
         //create course
         $course = new Course;
         $course->name = $request->input('name');
@@ -88,6 +111,8 @@ class CourseController extends Controller
         $course->trainer_name = $request->input('trainerName');
         $course->user_id = auth()->user()->id;
         $course->description = $request->input('description');
+        $course->avatar = $filename;
+//        $course->avatar = $fileNameToStore;
         $course->start_date = $request->input('start');
         $course->end_date = $request->input('end');
         $course->location = $request->input('location');
@@ -99,8 +124,8 @@ class CourseController extends Controller
     {
         $course = Course::find($id);
         //check for correct user
-        if(auth()->user()->id !==$course->user_id){
-            return redirect('/courses')->with('error','Unauthorized page');
+        if (auth()->user()->id !== $course->user_id) {
+            return redirect('/courses')->with('error', 'Unauthorized page');
 
         }
         $course->delete();
