@@ -15,8 +15,8 @@
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/css/bootstrap.min.css"
           integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
-
+{{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
+<!-- Custom styles for this template -->
     <style>
         body {
             font-family: 'Lato';
@@ -28,10 +28,11 @@
     </style>
 </head>
 <body id="app-layout">
+<!-- Navigation -->
 <nav class="navbar navbar-default navbar-static-top" style="background-color: #60ba46; border-color: #60ba46;">
     <div class="container">
         @include('inc.messages')
-        <div class="navbar-header">
+        <div class="navbar-brand">
 
             <!-- Collapsed Hamburger -->
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -107,6 +108,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js"
         integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS"
         crossorigin="anonymous"></script>
+<!-- Bootstrap core JavaScript -->
+<script src="/js/bootstrap.bundle.min.js"></script>
 
 @yield('script')
 {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}

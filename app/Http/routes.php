@@ -16,19 +16,18 @@ Route::get('/', function () {
 });
 
 Route::resource("courses", "CourseController");
-Route::post('save','CourseController@save');
-Route::DELETE('delete/{id}','CourseController@delete');
-Route::put('update/{id}','CourseController@update');
+Route::post('save', 'CourseController@save');
+Route::DELETE('delete/{id}', 'CourseController@delete');
+Route::put('update/{id}', 'CourseController@update');
 
 
 Route::get('/home', 'HomeController@index');
 
-Route::post('/language', array (
-   'Middleware'=>'LanguageSwitcher',
-   'uses'=>'LanguageController@index'
+Route::post('/language', array(
+    'Middleware' => 'LanguageSwitcher',
+    'uses' => 'LanguageController@index'
 ));
 
 Route::get('profile', 'UserController@profile');
 Route::post('profile', 'UserController@update_avatar');
 Route::auth();
-

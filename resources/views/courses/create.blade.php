@@ -23,6 +23,16 @@
                             {{Form::text('location', '', ['class' => 'form-control', 'placeholder' => 'Location'])}}
                         </div>
                         <div class="form-group">
+                            <label for="cityname">City</label>
+                            <select class="form-control" name="city" id="city" data-parsley-required="true">
+                                @foreach ($city as $sn)
+                                    {
+                                    <option value="{{ $sn->name }}">{{ $sn->name }}</option>
+                                    }
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
                             {{Form::label('trainerName', 'Trainer Name')}}
                             {{Form::text('trainerName', '', ['class' => 'form-control', 'placeholder' => 'Trainer Name'])}}
                         </div>
