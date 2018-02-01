@@ -22,6 +22,11 @@
                             {{Form::label('location', 'Location')}}
                             {{Form::text('location', '', ['class' => 'form-control', 'placeholder' => 'Location'])}}
                         </div>
+                        <br>
+                        <h4>Map</h4>
+
+                        <div id="map" style="width:100%;height:400px;"></div>
+                        <br>
                         <div class="form-group">
                             <label for="cityname">City</label>
                             <select class="form-control" name="city" id="city" data-parsley-required="true">
@@ -55,13 +60,53 @@
                             {{Form::date('end', '', ['class' => 'form-control', 'placeholder' => 'End Date'])}}
                         </div>
                         <div class="form-group">
-                             {{Form::file('avatar')}}
+                            {{Form::file('avatar')}}
+                        </div>
+                        {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
+                        {!! Form::close() !!}
                     </div>
-                    {{Form::submit('Submit', ['class'=>'btn btn-primary'])}}
-                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
     </div>
-    </div>
+    <!-- JavaScripts -->
+    @yield('script')
+
+    <script>
+
+        function initMap() {
+            // Create a map object and specify the DOM element for display.
+            var myLatLng = {lat: 24.774265, lng: 46.738586};
+            var marker;
+            var map = new google.maps.Map(document.getElementById('map'), {
+                center: myLatLng,
+                zoom: 8,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+            map.addListener('click', function (e) {
+                placeMarker(e.latLng, map);
+            });
+
+            function placeMarker(position) {
+                if (marker) {
+                    //if marker already was created change positon
+                    marker.setPosition(position);
+                } else {
+                    //create a marker
+                    marker = new google.maps.Marker({
+                        position: position,
+                        map: map,
+                        draggable: true
+                    });
+                }
+                google.maps.event.addListener(marker, 'dragend', function(event) {
+                    document.getElementById("latbox").value = this.getPosition().lat();
+                    document.getElementById("lngbox").value = this.getPosition().lng();
+                });
+            }
+        }
+    </script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCx6SgZRSGWdAJzzWa3qkpxGXBwCxkLFi8&callback=initMap"
+            async defer></script>
+    @yield('script')
 @endsection

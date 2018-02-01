@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use Request;
 use App\Course;
 use App\City;
-use App\Http\Requests;
-use Illuminate\Support\Facades\DB;
 use Image;
 
 
@@ -21,9 +19,9 @@ class CourseController extends Controller
     //return = Course::where('name', 'الموارد البشرية')->get();
     public function index()
     {
-        $city = City::all();
-        $courses = Course::orderBy('name', 'asc')->paginate(5);
-        return view('courses.index')->with('courses', $courses, 'city', $city);
+//        $city = City::all();
+        $courses = Course::orderBy('name', 'asc')->paginate(15);
+        return view('courses.index')->with('courses', $courses);
     }
 
     //create a new course
@@ -91,7 +89,7 @@ class CourseController extends Controller
         //
         $avatar = $request->file('avatar');
         $filename = time() . '.' . $avatar->getClientOriginalExtension();
-        Image::make($avatar)->resize(300, 300)->save( public_path('/uploads/avatars/' . $filename ) );
+        Image::make($avatar)->resize(300, 300)->save(public_path('/uploads/avatars/' . $filename));
 
         //create course
         $course = new Course;
@@ -122,4 +120,22 @@ class CourseController extends Controller
         return redirect('/home')->with('success', 'Course Deleted');
     }
 
+    public function search(Request $request)
+    {
+        // Gets the query string from our form submission
+        $query = Request::input('search');
+        // Returns an array of articles that have the query string located somewhere within
+        // our articles titles. Paginates them so we can break up lots of search results.
+        $courses = Course::where('name', 'LIKE', '%' . $query . '%')->paginate(10);
+
+        // returns a view and passes the view the list of articles and the original query.
+        return view('courses.search', compact('courses', 'query'));
+    }
+
 }
+
+//// Gets the query string from our form submission
+//$query = Request::input('search');
+//// Returns an array of articles that have the query string located somewhere within
+//// our articles titles. Paginates them so we can break up lots of search results.
+//$course = DB::table('courses')->where('name', 'LIKE', '%' . $query . '%')->paginate(10);

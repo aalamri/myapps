@@ -19,7 +19,7 @@ Route::resource("courses", "CourseController");
 Route::post('save', 'CourseController@save');
 Route::DELETE('delete/{id}', 'CourseController@delete');
 Route::put('update/{id}', 'CourseController@update');
-
+Route::post('search', 'CourseController@search');
 
 Route::get('/home', 'HomeController@index');
 
