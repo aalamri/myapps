@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+    <br>
+    <br>
+    <br>
     <div class="container">
         <div class="row text-center">
 
@@ -24,6 +27,7 @@
                 @endforeach
             @endif
         </div>
+        <a href="/courses" class="btn btn-info" role="button">Go Back</a>
     </div>
 
 @endsection
