@@ -1,8 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
     <div class="container">
-        <div class="row text-center">
+        <div class="row text-center" style="margin-top: 175px;">
 
             @if (count($courses) === 0)
                 ...sorry no courses found
